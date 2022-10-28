@@ -10,10 +10,6 @@
     "dbinit": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
     "seedinit": "npx sequelize db:seed:undo:all && npx sequelize db:seed:all"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/elliotcs30/movie-express-grading.git"
-  },
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
