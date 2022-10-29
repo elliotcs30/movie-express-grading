@@ -30,6 +30,18 @@ const adminController = {
         res.redirect('/admin/movies') // 新增完成後導回後台首頁
       })
       .catch(err => next(err))
+  },
+  getMovie: (req, res, next) => {
+    Movie.findByPk(req.params.id, { // 去資料庫用id找一筆資料
+      raw: true // 找到以後整理格式再回傳
+    })
+      .then(movie => {
+        // 如果找不到，回傳錯誤訊息，後面不執行
+        if (!movie) throw new Error("Movie didn't exist!")
+
+        res.render('admin/movie', { movie })
+      })
+      .catch(err => next(err))
   }
 }
 
