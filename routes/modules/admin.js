@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
-const { authenticatedAdmin } = require('../../middleware/auth')
 
-router.get('/movies', authenticatedAdmin, adminController.getMovies)
+router.get('/movies/create', adminController.createMovie)
+
+router.get('/movies', adminController.getMovies)
+router.post('/movies', adminController.postMovie)
 router.get('/', (req, res) => res.redirect('/admin/movies'))
 
 module.exports = router
