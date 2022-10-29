@@ -11,6 +11,7 @@
     "seedinit": "npx sequelize db:seed:undo:all && npx sequelize db:seed:all"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
     "mysql2": "^2.3.0",
