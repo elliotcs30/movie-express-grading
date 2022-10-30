@@ -6,6 +6,7 @@ router.get('/movies/create', adminController.createMovie)
 router.get('/movies/:id/edit', adminController.editMovie)
 router.get('/movies/:id', adminController.getMovie)
 router.put('/movies/:id', adminController.putMovie)
+router.delete('/movies/:id', adminController.deleteMovie)
 
 router.get('/movies', adminController.getMovies)
 router.post('/movies', adminController.postMovie)

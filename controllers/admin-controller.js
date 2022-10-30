@@ -72,6 +72,16 @@ const adminController = {
         res.redirect('/admin/movies')
       })
       .catch(err => next(err))
+  },
+  deleteMovie: (req, res, next) => {
+    return Movie.findByPk(req.params.id)
+      .then(movie => {
+        if (!movie) throw new Error("Movie didn't exist!")
+
+        return movie.destroy()
+      })
+      .then(() => res.redirect('/admin/movies'))
+      .catch(err => next(err))
   }
 }
 
