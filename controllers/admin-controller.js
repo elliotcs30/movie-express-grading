@@ -22,7 +22,7 @@ const adminController = {
       title,
       genres,
       description,
-      release_date: releaseDate,
+      releaseDate,
       image
     })
       .then(() => {
@@ -40,6 +40,36 @@ const adminController = {
         if (!movie) throw new Error("Movie didn't exist!")
 
         res.render('admin/movie', { movie })
+      })
+      .catch(err => next(err))
+  },
+  editMovie: (req, res, next) => {
+    Movie.findByPk(req.params.id, {
+      raw: true
+    }).then(movie => {
+      if (!movie) throw new Error("Movie didn't exist!")
+      res.render('admin/edit-movie', { movie })
+    }).catch(err => next(err))
+  },
+  putMovie: (req, res, next) => {
+    const { title, genres, description, releaseDate, image } = req.body
+
+    if (!title) throw new Error('Title name is required!')
+
+    Movie.findByPk(req.params.id)
+      .then(movie => {
+        if (!movie) throw new Error('Movie name is required!')
+        return movie.update({
+          title,
+          genres,
+          description,
+          releaseDate,
+          image
+        })
+      })
+      .then(() => {
+        req.flash('success_messages', 'movie was successfully to update')
+        res.redirect('/admin/movies')
       })
       .catch(err => next(err))
   }

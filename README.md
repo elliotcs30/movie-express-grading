@@ -70,7 +70,7 @@ npm install
 需要與 config/config.json 一致
 
 ```
-create database movie;
+create database movies;
 ```
 
 ### 執行測試
