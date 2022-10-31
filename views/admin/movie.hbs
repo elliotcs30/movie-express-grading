@@ -7,7 +7,11 @@
       <ul class="list-unstyled">
         <li><strong>Genres:</strong> {{movie.genres}}</li>
         <li><strong>Release date:</strong> {{momentDate movie.releaseDate}}</li>
-        <li><strong>image:</strong> {{movie.image}}</li>
+        <li>
+          <strong>image:</strong>
+          <img class="img-responsive center-block" style="width: 250px; margin-bottom: 25px; transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;" src="{{movie.image}}" alt="movie image" onload="this.style.opacity=1;">
+          <br>
+        </li>
       </ul>
     </div>
   </div>
