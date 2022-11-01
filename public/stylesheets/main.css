@@ -1,0 +1,6 @@
+.movie-image {
+  width: 250px;
+  margin-bottom: 25px;
+  transition: opacity 0.5s;
+  opacity: 0;
+}
