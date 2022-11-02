@@ -1,5 +1,7 @@
-const path = require('path')
 const express = require('express')
+const path = require('path')
+const bodyparser = require('body-parser')
+const readXlsxFile = require('read-excel-file/node')
 const handlebars = require('express-handlebars') // 引入 express-handlebars
 const flash = require('connect-flash')
 const methodOverride = require('method-override')
@@ -21,7 +23,8 @@ app.engine('hbs', handlebars({ extname: '.hbs', helpers: handlebarsHelpers }))
 // 設定使用 Handlebars 做為樣板引擎
 app.set('view engine', 'hbs')
 
-app.use(express.urlencoded({ extended: true }))
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({ extended: true }))
 app.use(session({ secret: SESSION_SECRET, resave: false, saveUninitialized: false }))
 app.use(passport.initialize()) // secret 初始化 Passport
 app.use(passport.session()) // 啟動 session 功能
@@ -34,6 +37,7 @@ app.use((req, res, next) => {
   res.locals.user = getUser(req)
   next()
 })
+
 app.use(express.static('public'))
 app.use(routes)
 

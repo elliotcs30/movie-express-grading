@@ -9,6 +9,23 @@ const localFileHandler = file => { // file 是 multer 處理完的檔案
       .catch(err => reject(err))
   })
 }
+
+
+  // readXlsxFile(exFile).then((rows) => {
+  //   rows.shift()
+  //   database.connect((error) => {
+  //     if (error) {
+  //       console.error(error)
+  //     } else {
+  //       let query = 'INSERT INTO user (id, name, email) VALUES ?'
+  //       connection.query(query, [rows], (error, response) => {
+  //         console.log(error || response)
+  //       })
+  //     }
+  //   })
+  // })
+
+
 module.exports = {
   localFileHandler
 }
