@@ -1,5 +1,5 @@
 const { Movie } = require('../models')
-const { localFileHandler } = require('../helpers/file-helpers') // 將 file-helper 載進來
+const { imgurFileHandler } = require('../helpers/file-helpers')
 
 const adminController = {
   getMovies: async (req, res, next) => {
@@ -17,10 +17,10 @@ const adminController = {
   postMovie: (req, res, next) => {
     const { title, genres, description, releaseDate } = req.body
 
-    if (!title) throw new Error('Restaurant name is required!') // title 是必填，若發先是空值就會終止程式碼，並在畫面顯示錯誤提示
+    if (!title) throw new Error('Title name is required!') // title 是必填，若發先是空值就會終止程式碼，並在畫面顯示錯誤提示
 
     const { file } = req // 把檔案取出來，也可以寫成 const file = req.file
-    localFileHandler(file) // 把取出的檔案傳給 file-helper 處理後
+    return imgurFileHandler(file) // 把取出的檔案傳給 file-helper 處理後
       .then(filePath => {
         Movie.create({
           title,
@@ -61,9 +61,9 @@ const adminController = {
     if (!title) throw new Error('Title name is required!')
 
     const { file } = req // 把檔案取出來
-    Promise.all([ // 非同步處理
+    return Promise.all([ // 非同步處理
       Movie.findByPk(req.params.id), // 去資料庫查有沒有這部電影
-      localFileHandler(file) // 把檔案傳到 file-helper 處理
+      imgurFileHandler(file) // 把檔案傳到 file-helper 處理
     ]).then(([movie, filePath]) => { // 以上兩樣事都做完以後
       if (!movie) throw new Error('Movie name is required!')
       return movie.update({
