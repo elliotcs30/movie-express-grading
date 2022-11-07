@@ -11,6 +11,9 @@ router.delete('/movies/:id', adminController.deleteMovie)
 
 router.get('/movies', adminController.getMovies)
 router.post('/movies', upload.single('image'), adminController.postMovie)
-router.get('/', (req, res) => res.redirect('/admin/movies'))
+
+router.patch('/users/:id', adminController.patchUser)
+router.get('/users', adminController.getUsers)
+router.use('/', (req, res) => res.redirect('/admin/movies'))
 
 module.exports = router
