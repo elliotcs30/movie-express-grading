@@ -1,4 +1,4 @@
-const { Movie, User } = require('../models')
+const { Movie, User, Category } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
 
 const adminController = {
@@ -28,7 +28,11 @@ const adminController = {
   },
   getMovies: async (req, res, next) => {
     try {
-      Movie.findAll({ raw: true })
+      Movie.findAll({
+        raw: true,
+        nest: true,
+        include: [Category]
+      })
         .then(movies => res.render('admin/movies', { movies }))
         .catch(err => next(err))
     } catch (err) {
@@ -62,7 +66,9 @@ const adminController = {
   },
   getMovie: (req, res, next) => {
     Movie.findByPk(req.params.id, { // 去資料庫用id找一筆資料
-      raw: true // 找到以後整理格式再回傳
+      raw: true, // 找到以後整理格式再回傳
+      nest: true,
+      include: [Category]
     })
       .then(movie => {
         // 如果找不到，回傳錯誤訊息，後面不執行
