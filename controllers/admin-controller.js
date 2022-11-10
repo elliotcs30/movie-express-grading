@@ -40,10 +40,12 @@ const adminController = {
     }
   },
   createMovie: (req, res, next) => {
-    return res.render('admin/create-movie')
+    return Category.findAll({ raw: true })
+      .then(categories => res.render('admin/create-restaurant', { categories }))
+      .catch(err => next(err))
   },
   postMovie: (req, res, next) => {
-    const { title, genres, description, releaseDate } = req.body
+    const { title, genres, description, releaseDate, categoryId } = req.body
 
     if (!title) throw new Error('Title name is required!') // title 是必填，若發先是空值就會終止程式碼，並在畫面顯示錯誤提示
 
@@ -55,7 +57,8 @@ const adminController = {
           genres,
           description,
           releaseDate,
-          image: filePath || null
+          image: filePath || null,
+          categoryId
         })
       })
       .then(() => {
@@ -78,15 +81,17 @@ const adminController = {
       .catch(err => next(err))
   },
   editMovie: (req, res, next) => {
-    Movie.findByPk(req.params.id, {
-      raw: true
-    }).then(movie => {
-      if (!movie) throw new Error("Movie didn't exist!")
-      res.render('admin/edit-movie', { movie })
-    }).catch(err => next(err))
+    return Promise.all([
+      Movie.findByPk(req.params.id, { raw: true }),
+      Category.findAll({ raw: true })
+    ])
+      .then(([movie, categories]) => {
+        if (!movie) throw new Error("Movie didn't exist!")
+        res.render('admin/edit-movie', { movie, categories })
+      }).catch(err => next(err))
   },
   putMovie: (req, res, next) => {
-    const { title, genres, description, releaseDate } = req.body
+    const { title, genres, description, releaseDate, categoryId } = req.body
 
     if (!title) throw new Error('Title name is required!')
 
@@ -101,7 +106,8 @@ const adminController = {
         genres,
         description,
         releaseDate,
-        image: filePath || movie.image // 如果 filePath 是 Truthy (使用者有上傳新照片) 就用 filePath，是 Falsy (使用者沒有上傳新照片) 就沿用原本資料庫內的值
+        image: filePath || movie.image, // 如果 filePath 是 Truthy (使用者有上傳新照片) 就用 filePath，是 Falsy (使用者沒有上傳新照片) 就沿用原本資料庫內的值
+        categoryId
       })
     })
       .then(() => {
