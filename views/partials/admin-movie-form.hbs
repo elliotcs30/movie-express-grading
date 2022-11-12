@@ -8,6 +8,9 @@
   <select class="form-control" name="categoryId" id="categoryId">
     {{#each categories}}
       <option value="{{this.id}}">{{this.name}}</option>
+      <option value="{{this.id}}" {{#ifCond this.id ../movie.categoryId}} selected {{/ifCond}}>
+        {{this.name}}
+      </option>
     {{/each}}
   </select>
 </div>

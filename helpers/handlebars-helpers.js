@@ -8,5 +8,9 @@ module.exports = {
   momentDate: function (date) {
     moment.locale('zh-tw')
     return moment(date).calendar()
+  },
+
+  ifCond: function (a, b, options) {
+    return a === b ? options.fn(this) : options.inverse(this)
   }
 }
