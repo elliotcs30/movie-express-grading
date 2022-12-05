@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const adminController = require('../../controllers/admin-controller')
+const categoryController = require('../../controllers/category-controller')
 const upload = require('../../middleware/multer')
 
 router.get('/movies/create', adminController.createMovie)
@@ -14,6 +15,7 @@ router.post('/movies', upload.single('image'), adminController.postMovie)
 
 router.patch('/users/:id', adminController.patchUser)
 router.get('/users', adminController.getUsers)
+router.get('/categories', categoryController.getCategories)
 router.use('/', (req, res) => res.redirect('/admin/movies'))
 
 module.exports = router
