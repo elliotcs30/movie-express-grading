@@ -41,7 +41,7 @@ const adminController = {
   },
   createMovie: (req, res, next) => {
     return Category.findAll({ raw: true })
-      .then(categories => res.render('admin/create-restaurant', { categories }))
+      .then(categories => res.render('admin/create-movie', { categories }))
       .catch(err => next(err))
   },
   postMovie: (req, res, next) => {
