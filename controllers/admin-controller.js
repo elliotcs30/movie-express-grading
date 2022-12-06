@@ -123,7 +123,10 @@ const adminController = {
 
         return movie.destroy()
       })
-      .then(() => res.redirect('/admin/movies'))
+      .then(() => {
+        req.flash('error_messages', 'movie was successfully to delete')
+        res.redirect('/admin/movies')
+      })
       .catch(err => next(err))
   }
 }
