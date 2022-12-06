@@ -2,6 +2,19 @@
   <label class="form-label" for="title">title</label>
   <input class="form-control" type="text" name="title" id="title" placeholder="Enter title" value="{{movie.title}}" required>
 </div>
+
+<div class="form-row mb-3">
+  <label class="form-label" for="catedoryId">Category</label>
+  <select class="form-control" name="categoryId" id="categoryId">
+    {{#each categories}}
+      <option value="{{this.id}}">{{this.name}}</option>
+      <option value="{{this.id}}" {{#ifCond this.id ../movie.categoryId}} selected {{/ifCond}}>
+        {{this.name}}
+      </option>
+    {{/each}}
+  </select>
+</div>
+
 <div class="form-row mb-3">
   <label class="form-label" for="genres">genres</label>
   <input class="form-control" type="text" name="genres" id="genres" placeholder="Enter genres" value="{{movie.genres}}" required>
