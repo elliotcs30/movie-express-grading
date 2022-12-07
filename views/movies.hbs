@@ -3,20 +3,26 @@
   <!-- seach panel -->
 
   <!-- movies list -->
-  <div class="row" id="data-panel">
+  <div class="row mt-3">
     {{#each movies}}
-    <div class="col-sm-3">
-      <a href="/{{this.id}}" class="text-secondary">
-        <div class="card mb-2">
-          <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
-          <div class="card-body movie-item-body">
-            <h6 class="card-title">{{this.title}}</h6>
-          </div>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <a href="/movies/{{this.id}}">
+          <img class="card-img-top img-fluid" src="{{this.image}}" alt="Card image cap" width="286px" height="180px"
+            style="transition: opacity 0.5s; opacity:0;" onload="this.style.opacity=1;">
+        </a>
+        <div class="card-body">
+          <p class="card-text">
+            <a href="/movies/{{this.id}}">
+              {{this.title}}
+            </a>
+          </p>
+          <span class="badge bg-secondary">{{this.Category.name}}</span>
+          <p class="card-text text-truncate">{{this.description}}</p>
         </div>
-      </a>
+      </div>
     </div>
     {{/each}}
-
-    <!-- movies -->
   </div>
+  <!-- movies -->
 </div>
