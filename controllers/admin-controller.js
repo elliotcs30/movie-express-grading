@@ -41,7 +41,7 @@ const adminController = {
   },
   createMovie: (req, res, next) => {
     return Category.findAll({ raw: true })
-      .then(categories => res.render('admin/create-restaurant', { categories }))
+      .then(categories => res.render('admin/create-movie', { categories }))
       .catch(err => next(err))
   },
   postMovie: (req, res, next) => {
@@ -123,7 +123,10 @@ const adminController = {
 
         return movie.destroy()
       })
-      .then(() => res.redirect('/admin/movies'))
+      .then(() => {
+        req.flash('error_messages', 'movie was successfully to delete')
+        res.redirect('/admin/movies')
+      })
       .catch(err => next(err))
   }
 }

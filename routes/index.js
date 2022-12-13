@@ -15,6 +15,7 @@ router.post('/signup', userController.signUp)
 router.get('/signin', userController.signInPage)
 router.post('/signin', passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }), userController.signIn)
 router.get('/logout', userController.logout)
+router.get('/movies/:id', authenticated, movieController.getMovie)
 router.get('/movies', authenticated, movieController.getMovies)
 
 router.use('/', (req, res) => res.redirect('/movies'))
