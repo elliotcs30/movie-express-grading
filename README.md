@@ -8,10 +8,11 @@
 ```
 git remote https://github.com/elliotcs30/movie-express-grading.git 
 npm install
+```
 
 ### Node.js & Express 相關套件
 ```
-  "node.js": "14.16.0"
+  "node.js": "14.16.0" // 若系統為 mac M1 chip 請升為 v16
   "express": "4.17.1"
   "express-handlebars": "5.3.3"
   "method-override": "3.0.0"
@@ -68,7 +69,6 @@ npm install
 
 ### 設定資料庫
 需要與 config/config.json 一致
-
 ```
 create database movies;
 ```
@@ -79,7 +79,7 @@ npm run test
 ```
 
 ## 共用帳號
-請一律設定下面 2 組帳號以利驗收：
+可使用下方 2 組帳號登入系統：
 * 第一組帳號有 admin 權限：
   * email: root@example.com
   * password: 12345678
